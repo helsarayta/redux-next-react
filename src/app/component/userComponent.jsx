@@ -1,16 +1,20 @@
 'use client'
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import fetchDataUser from '../redux/user/userAction'
 import { connect } from 'react-redux'
 import ListUserComponent from './listUserComponent'
 import UserNameComponent from './UserNameComponent'
+import axios from 'axios'
+import fecthData from '../redux/user/userAction'
 
 
-const userComponent = ({state, fetchUser}) => {
+const userComponent = ({state,fecthUser}) => {
+
+console.log("STATE => ", state)
+    
    
     useEffect(() => {
-        fetchUser()
+        // fetchUser()
+        fecthUser()
     },[])
     
 
@@ -41,7 +45,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUser: () => dispatch(fetchDataUser())
+        fecthUser: () => {
+            dispatch(fecthData.fetchhUserRequest())
+            axios.get('https://jsonplaceholder.typicode.com/users').then(resp => {
+                    dispatch(fecthData.fetchhUserSuccess(resp.data))
+            })
+            .catch(e => {
+                dispatch(fecthData.fetchhUserFailure(e.message))
+            })
+            
+           
+        }
     }
 }
 

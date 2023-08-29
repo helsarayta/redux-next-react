@@ -4,19 +4,19 @@ import {FETCH_USERS_REQUEST,
     FETCH_USERS_SUCCESS,
     FETCH_USERS_FAILURE} from './userTypes'
 
-export default function fetchDataUser() {
-    return (dispatch) => {
-        dispatch(fetchhUserRequest)
-        axios.get('https://jsonplaceholder.typicode.com/users').then(response => {
-            const user = response.data;
-            console.log("USER => ", user)
-            dispatch(fetchhUserSuccess(user))    
-        })
-        .catch(e => {
-            dispatch(fetchhUserFailure(e.message))
-        })
-    }
-}    
+// function fetchDataUser() {
+//     return (dispatch) => {
+//         dispatch(fetchhUserRequest)
+//         axios.get('https://jsonplaceholder.typicode.com/users').then(response => {
+//             const user = response.data;
+//             console.log("USER => ", user)
+//             dispatch(fetchhUserSuccess(user))    
+//         })
+//         .catch(e => {
+//             dispatch(fetchhUserFailure(e.message))
+//         })
+//     }
+// }    
 
 const fetchhUserRequest = () => {
     return {
@@ -37,4 +37,12 @@ const fetchhUserFailure = (error) => {
         payload:error
     }
 }
+
+const fecthData = {
+    fetchhUserRequest,
+    fetchhUserSuccess,
+    fetchhUserFailure
+}
+
+export default fecthData;
 
